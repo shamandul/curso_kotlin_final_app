@@ -1,7 +1,8 @@
-package es.webweaver.finalapp
+package es.webweaver.finalapp.activities
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import es.webweaver.finalapp.R
 
 class LoginActivity : AppCompatActivity() {
 
