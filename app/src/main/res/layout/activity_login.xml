@@ -54,9 +54,9 @@
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginStart="32dp"
                 android:id="@+id/buttonLogIn" android:layout_marginBottom="32dp"
-                app:layout_constraintBottom_toTopOf="@+id/TextViewForgotPassword"/>
+                app:layout_constraintBottom_toTopOf="@+id/textViewForgotPassword"/>
         <TextView
-                android:id="@+id/TextViewForgotPassword"
+                android:id="@+id/textViewForgotPassword"
                 android:text="@string/login_forgot_password"
                 android:textColor="@color/colorSecondaryText"
                 android:layout_width="wrap_content"
@@ -77,9 +77,9 @@
                 android:layout_marginEnd="32dp"
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginStart="32dp" android:layout_marginBottom="32dp"
-                app:layout_constraintBottom_toTopOf="@+id/buttonSignUp"/>
+                app:layout_constraintBottom_toTopOf="@+id/buttonCreateAcount"/>
         <Button
-                android:id="@+id/buttonSignUp"
+                android:id="@+id/buttonCreateAcount"
                 android:background="@drawable/button_ripple"
                 android:text="@string/login_create_account"
                 android:textColor="@color/colorSecondaryText"
