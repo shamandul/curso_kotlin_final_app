@@ -34,6 +34,10 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-v4'
         exclude group: 'com.android.support', module: 'animated-vector-drawable'
     }
+    implementation 'com.google.firebase:firebase-auth:16.0.1', {
+        exclude group: 'com.android.support', module: 'support-v4'
+        exclude group: 'com.android.support', module: 'animated-vector-drawable'
+    }
 }
 
 apply plugin: 'com.google.gms.google-services'
