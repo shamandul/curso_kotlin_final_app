@@ -3,11 +3,13 @@ package es.webweaver.finalapp.activities
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import es.webweaver.finalapp.R
+import android.text.Editable
+import android.text.TextWatcher
+import android.util.Patterns
 import com.google.firebase.auth.FirebaseAuth
-import es.webweaver.finalapp.goToActivity
-import es.webweaver.finalapp.toast
+import es.webweaver.finalapp.*
 import kotlinx.android.synthetic.main.activity_sign_up.*
+import java.util.regex.Pattern
 
 
 class SignUpActivity : AppCompatActivity() {
@@ -36,7 +38,18 @@ class SignUpActivity : AppCompatActivity() {
             }
         }
 
+        editTextEmail.validate {
+            editTextEmail.error = if(isValiEmail(it)) null else "Email is not valid"
+        }
+        editTextPassword.validate {
+            editTextEmail.error = if(isValiPassword(it)) null else "Passaword shoul contain 1 lowrcase, 1 uppercase, 1 number, 1 special characte an 4 character lenght at least."
+        }
+        editTextConfirmPassword.validate {
+            editTextConfirmPassword.error = if(isvValiConfirmPassword(editTextPassword.text.toString(), it)) null else "Confirm Password does not match with Password "
+        }
     }
+
+
 
     private fun signUpByEmail(email: String, password: String){
 
@@ -57,10 +70,11 @@ class SignUpActivity : AppCompatActivity() {
                 // ...
             }
     }
-
     private fun isValiEmailAndPassword(email: String, password: String):Boolean{
         return !email.isNullOrEmpty() && !password.isNullOrEmpty() &&
-                password === editTextConfirmPassword.text.toString()
+                password == editTextConfirmPassword.text.toString()
 
     }
+
+
 }
