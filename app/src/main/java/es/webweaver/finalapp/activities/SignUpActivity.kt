@@ -3,13 +3,9 @@ package es.webweaver.finalapp.activities
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
-import android.util.Patterns
 import com.google.firebase.auth.FirebaseAuth
 import es.webweaver.finalapp.*
 import kotlinx.android.synthetic.main.activity_sign_up.*
-import java.util.regex.Pattern
 
 
 class SignUpActivity : AppCompatActivity() {
@@ -29,12 +25,15 @@ class SignUpActivity : AppCompatActivity() {
         }
 
         buttonSingUp.setOnClickListener {
+
             val email = editTextEmail.text.toString()
             val password = editTextPassword.text.toString()
-            if (isValiEmailAndPassword(email, password)   ){
+            val confirmPassword = editTextConfirmPassword.text.toString()
+
+            if (isValiEmail(email) && isValiPassword(password) && isvValiConfirmPassword(password, confirmPassword) ){
                 signUpByEmail(email, password)
             } else {
-                toast( "Please fill all data and confirm password is correct.")
+                toast( "Please make sure all data is correct.")
             }
         }
 
@@ -57,11 +56,13 @@ class SignUpActivity : AppCompatActivity() {
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
-                    toast("An email has been sent to you. Please, confirm before sign in.")
-                    goToActivity<LoginActivity> {
-                        flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    mAuth.currentUser!!.sendEmailVerification().addOnCompleteListener(this){
+                        toast("An email has been sent to you. Please, confirm before sign in.")
+                        goToActivity<LoginActivity> {
+                            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                        }
+                        overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out)
                     }
-                    overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out)
                 }else{
                     // If sign in fails, display a message to the user.
                     toast("An unexpected error occurred, please try again.")
@@ -69,11 +70,6 @@ class SignUpActivity : AppCompatActivity() {
 
                 // ...
             }
-    }
-    private fun isValiEmailAndPassword(email: String, password: String):Boolean{
-        return !email.isNullOrEmpty() && !password.isNullOrEmpty() &&
-                password == editTextConfirmPassword.text.toString()
-
     }
 
 
